@@ -5,9 +5,6 @@ require './crop'
 app = Dragonfly[:images].configure_with(:imagemagick)
 app.configure do |c| 
 
-  c.protect_from_dos_attacks = true
-  c.secret = 'Abracadabra blue mushrooms FTW!'
-
   c.url_host = 'http://localhost:3001'
 
   c.job :tile_crop do |image, crop_request|

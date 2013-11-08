@@ -1,0 +1,13 @@
+How to use:
+
+# install the required gems
+bundle
+
+# start the server
+thin -V -R config.ru -p 3001 start
+
+# fetch a remote image, store it, crop it, and get an url for the cropped image
+ruby setup.rb
+
+# open the url in the browser
+open http://localhost:3001/...{enter the last url setup.rb gives you}
