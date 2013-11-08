@@ -1,0 +1,22 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    daemons (1.1.9)
+    dragonfly (0.9.15)
+      multi_json (~> 1.0)
+      rack
+    eventmachine (1.0.3)
+    multi_json (1.8.2)
+    rack (1.5.2)
+    thin (1.6.1)
+      daemons (>= 1.0.9)
+      eventmachine (>= 1.0.0)
+      rack (>= 1.0.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  dragonfly
+  rack
+  thin
