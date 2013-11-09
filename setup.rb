@@ -8,18 +8,8 @@ APP_ROOT = Pathname.new(File.dirname(__FILE__))
 app = Dragonfly[:images].configure_with(:imagemagick)
 
 app.configure do |c| 
-
   c.url_host = 'http://localhost:3001'
-
-  c.job :tile_crop do |image, crop_request|
-
-    crop_args = TileImageCropper.new(image, crop_request).cli_arguments
-    process(:convert, crop_args)
-    encode :jpg
-  end
-
   c.log = Logger.new(APP_ROOT.join('log/dragonfly_setup.log'))
-
 end 
 
 app.datastore.configure do |d|
@@ -46,5 +36,7 @@ info(image, 'original')
 # these are the crop settings the user gave us
 crop_request = OpenStruct.new(width: 560, height: 315, left: -50, top: 0)
 
-cropped_image = image.tile_crop(image, crop_request)
+crop_args = TileImageCropper.new(image, crop_request).cli_arguments
+# TODO consider making this a known job if more steps are added
+cropped_image = image.convert(crop_args).encode(:jpg)
 info(cropped_image, 'cropped')
