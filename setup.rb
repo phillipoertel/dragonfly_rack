@@ -21,6 +21,7 @@ def info(image, title)
   puts "landscape? #{image.landscape?}"
   puts "#{image.size} bytes"
   puts "#{image.width}x#{image.height}"
+  puts "#{image.path} path"
   puts "#{image.url}"
 end
 
@@ -32,9 +33,8 @@ uid = app.store(remote_image)
 # open saved image
 image = app.fetch(uid)
 info(image, 'original')
-
 # these are the crop settings the user gave us
-crop_request = OpenStruct.new(width: 560, height: 315, left: -100, top: 0)
+crop_request = OpenStruct.new(width: 560, height: 315, left: -50, top: 0)
 
-cropped = image.tile_crop(image, crop_request)
-info(cropped, 'cropped')
+cropped_image = image.tile_crop(image, crop_request)
+info(cropped_image, 'cropped')
