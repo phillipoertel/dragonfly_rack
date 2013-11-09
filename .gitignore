@@ -1,2 +1,3 @@
 .DS_Store
-cache/rack
+cache/*
+datastore/*

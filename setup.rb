@@ -1,8 +1,12 @@
 require 'dragonfly'
+require 'pathname'
+
 require './crop'
 
+APP_ROOT = Pathname.new(File.dirname(__FILE__))
 
 app = Dragonfly[:images].configure_with(:imagemagick)
+
 app.configure do |c| 
 
   c.url_host = 'http://localhost:3001'
@@ -14,7 +18,13 @@ app.configure do |c|
     encode :jpg
   end
 
+  c.log = Logger.new(APP_ROOT.join('log/dragonfly_setup.log'))
+
 end 
+
+app.datastore.configure do |d|
+  d.root_path = APP_ROOT.join('datastore').to_s # defaults to /var/tmp/dragonfly
+end
 
 def info(image, title) 
   puts "-- #{title} --"
